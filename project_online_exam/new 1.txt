@@ -1,0 +1,96 @@
+//close browser 
+$(window).bind("beforeunload", function() { 
+    return confirm("Do you really want to close?"); 
+})
+//unload
+
+$(window).unload(function(){
+alert("Goodbye!");
+});
+//
+<script type="text/javascript">
+$(document).ready(function() {
+  $(document).mousemove(function(e) {
+    if(e.pageY <= 5)
+    {
+        //this condition would occur when the user brings their cursor on address bar 
+        //do something here 
+    }
+  });
+});
+</script>
+//
+ $(document).ready(function () {
+ var checkCloseX = 0;
+        $(document).mousemove(function (e) {
+            if (e.pageY <= 5) {
+                checkCloseX = 1;
+            }
+            else { checkCloseX = 0; }
+        });
+
+        window.onbeforeunload = function (event) {
+            if (event) {
+                if (checkCloseX == 1) {
+
+                    //alert('1111');
+                    $.ajax({
+                        type: "GET",
+                        url: "Account/SetAuditHeaderTimeOut",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result != null) {
+                            }
+                        }
+                    });
+                }
+            }
+        };
+  });
+//
+window.open("mypage.html","mywindowname", "toolbar=no,menubar=no");
+//browser is active or not 
+https://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active
+var interval_id;
+$(window).focus(function() {
+    if (!interval_id)
+        interval_id = setInterval(hard_work, 1000);
+});
+
+$(window).blur(function() {
+    clearInterval(interval_id);
+    interval_id = 0;
+});
+//
+$(window).on("blur focus", function(e) {
+    var prevType = $(this).data("prevType");
+
+    if (prevType != e.type) {   //  reduce double fire issues
+        switch (e.type) {
+            case "blur":
+                // do work
+                break;
+            case "focus":
+                // do work
+                break;
+        }
+    }
+
+    $(this).data("prevType", e.type);
+})
+//active or not 
+var isActive;
+
+window.onfocus = function () { 
+  isActive = true; 
+}; 
+
+window.onblur = function () { 
+  isActive = false; 
+}; 
+
+// test
+setInterval(function () { 
+  console.log(window.isActive ? 'active' : 'inactive'); 
+}, 1000);
+// 

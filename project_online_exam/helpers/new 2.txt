@@ -1,0 +1,36 @@
+
+RewriteRule ^first.html$ second.html
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php?clean_url=$1 [QSA,L]
+</IfModule>
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^folder1.*$ http://example.com/folder2/ [R=301,L]
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^folder1.*$ http://example.com/ [R=301,L]
+RewriteEngine On 
+RewriteCond %{REQUEST_URI} [A-Z] 
+RewriteRule . ${lc:%{REQUEST_URI}} [R=301,L]
+
+RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_URI} !example.php
+        RewriteCond %{REQUEST_URI} !(.*)/$
+        RewriteRule ^(.*)$ http://example.com/$1/ [L,R=301]
+		
+		
+RewriteCond %{HTTP_HOST} old_domain.com [NC]
+RewriteRule ^(.*)$ http://www.new_domain.com/$1 [L,R=301]
+
+
+RewriteCond %{HTTP_HOST} ^domain.com [NC]
+RewriteRule ^(.*)$ http://www.domain.com/$1 [L,R=301]
+
+
+RewriteCond %{HTTP_HOST} ^www.domain.com [NC]
+RewriteRule ^(.*)$ http://domain.com/$1 [L,R=301]
